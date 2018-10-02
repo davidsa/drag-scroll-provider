@@ -1,0 +1,25 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.example {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example__scroll {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  overflow-x: scroll;
+}
+
+.example__scroll::-webkit-scrollbar {
+  display: none;
+}
