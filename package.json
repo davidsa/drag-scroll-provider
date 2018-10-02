@@ -5,9 +5,23 @@
   "main": "index.js",
   "author": "David Sttivend A",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidsa/drag-scroll-provider.git"
+  },
+  "homepage": "https://github.com/davidsa/drag-scroll-provider",
+  "bugs": {
+    "url": "https://github.com/davidsa/drag-scroll-provider/issues"
+  },
+  "keywords": [
+    "react",
+    "drag",
+    "scroll"
+  ],
   "scripts": {
     "build": "webpack --config webpack/prod.config.js",
-    "dev": "webpack-dev-server --config webpack/dev.config.js"
+    "dev": "webpack-dev-server --config webpack/dev.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "react": "^16.5.2"
