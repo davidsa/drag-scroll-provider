@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "David Sttivend A",
   "license": "MIT",
+  "files":["dist/main.js","index.js"],
   "repository": {
     "type": "git",
     "url": "https://github.com/davidsa/drag-scroll-provider.git"
