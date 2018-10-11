@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'main.js',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{ test: /\.jsx?$/, use: 'babel-loader', exclude: /node_modules/ }],

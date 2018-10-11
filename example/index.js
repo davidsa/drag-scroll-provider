@@ -1,6 +1,6 @@
 import { render } from 'react-dom'
 import React, { Component } from 'react'
-import DragScrollProvider from '../src/DragScrollProvider'
+import DragScrollProvider from '../'
 import './app.css'
 
 const COLORS = ['red', 'blue', 'orange', 'black', 'yellow']
