@@ -41,8 +41,9 @@ import DragScrollProvider from 'drag-scroll-provider'
     width: 500px;
     overflow-x: scroll;   
 }
-
-// hide the scrollbar 
+```
+optional: hide the scrollbar
+```css 
 .scrollable::-webkit-scrollbar {
     display: none;
 } 
