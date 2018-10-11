@@ -28,7 +28,7 @@ import DragScrollProvider from 'drag-scroll-provider'
           className="scrollable"
           ref={ref}
           onMouseDown={onMouseDown}>
-            {// content that overflows the parent}
+            // content that overflows the parent
         </div>
     )}
 </DragScrollProvider>
@@ -65,9 +65,9 @@ optional: hide the scrollbar
 }}
 ```
 
-### Handle on click event on children components
+### Handle on click event on child components
 
-When you need to have on click events on children components you need to wrap your click event on this provided function so the scroller knows that is not a drag triggering click, mainly for avoiding weird issues with the scroll.
+When you need to handle a click events on child components you need to wrap your click event on this provided function so the scroller knows that is not a drag triggering click, mainly for avoiding weird issues with the scroll.
 
 Lets say you have a `<Card />` component that handles a click event
 
