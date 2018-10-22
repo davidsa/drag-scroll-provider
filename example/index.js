@@ -1,6 +1,6 @@
 import { render } from 'react-dom'
 import React, { Component } from 'react'
-import DragScrollProvider from '../'
+import DragScrollProvider from '../src/DragScrollProvider'
 import './app.css'
 
 const COLORS = ['red', 'blue', 'orange', 'black', 'yellow']
@@ -8,7 +8,7 @@ const COLORS = ['red', 'blue', 'orange', 'black', 'yellow']
 class Example extends Component {
   constructor(props) {
     super(props)
-    this.numberOfCards = 100
+    this.numberOfCards = 1000
   }
 
   getRandomNumber(start, end) {
@@ -27,17 +27,34 @@ class Example extends Component {
   render() {
     return (
       <div className="example">
-        <DragScrollProvider>
-          {({ onMouseDown, ref }) => (
-            <div
-              className="example__scroll"
-              ref={ref}
-              onMouseDown={onMouseDown}
-            >
-              {this.getCards()}
-            </div>
-          )}
-        </DragScrollProvider>
+        <h1>Horizontal example</h1>
+        <div className="example__container">
+          <DragScrollProvider>
+            {({ onMouseDown, ref }) => (
+              <div
+                className="example__scroll example__scroll--horizontal "
+                ref={ref}
+                onMouseDown={onMouseDown}
+              >
+                {this.getCards()}
+              </div>
+            )}
+          </DragScrollProvider>
+        </div>
+        <h1>Vertical example</h1>
+        <div className="example__container">
+          <DragScrollProvider vertical={true}>
+            {({ onMouseDown, ref }) => (
+              <div
+                className="example__scroll example__scroll--vertical"
+                ref={ref}
+                onMouseDown={onMouseDown}
+              >
+                {this.getCards()}
+              </div>
+            )}
+          </DragScrollProvider>
+        </div>
       </div>
     )
   }
