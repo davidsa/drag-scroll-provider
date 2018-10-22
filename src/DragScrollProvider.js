@@ -9,11 +9,14 @@ export default class DragScrollProvider extends Component {
       isMouseDown: false,
       lastMousePosition: null,
       dragging: false,
+      startTime: null,
     }
     this.refElement = null
     this.clearListeners = []
     this.scrollAttr = 'scrollLeft'
     this.eventMove = 'clientX'
+    this.scrollLength = 'scrollWidth'
+    this.scrollOffset = 'offsetWidth'
   }
 
   setPrivateState(state) {
@@ -21,7 +24,7 @@ export default class DragScrollProvider extends Component {
   }
 
   addEventListenerWithClear(type, func) {
-    document.documentElement.addEventListener(type, func)
+    this.refElement.addEventListener(type, func)
     const clear = this.removeListenerFactory(type, func)
     this.clearListeners.push(clear)
   }
@@ -34,6 +37,8 @@ export default class DragScrollProvider extends Component {
     if (this.props.vertical) {
       this.scrollAttr = 'scrollTop'
       this.eventMove = 'clientY'
+      this.scrollLength = 'scrollHeight'
+      this.scrollOffset = 'offsetHeight'
     }
     this.addEventListenerWithClear('mouseup', this.onMouseUp)
     this.addEventListenerWithClear('mousemove', this.onMouseMove)
@@ -41,6 +46,19 @@ export default class DragScrollProvider extends Component {
 
   componentWillUnmount() {
     this.clearListeners.forEach(clear => clear())
+  }
+
+  keepScrolling(acceleration) {
+    const max =
+      this.refElement[this.scrollLength] - this.refElement[this.scrollOffset]
+    this.animation = setTimeout(() => {
+      const scroll = this.refElement[this.scrollAttr]
+      if (scroll !== 0 && scroll !== max && acceleration !== 0) {
+        this.refElement[this.scrollAttr] += acceleration
+        acceleration = acceleration > 0 ? acceleration - 1 : acceleration + 1
+        return this.keepScrolling(acceleration)
+      }
+    }, 10)
   }
 
   onMouseMove = event => {
@@ -65,13 +83,25 @@ export default class DragScrollProvider extends Component {
   }
 
   onMouseUp = event => {
+    const { startTime, positionStart } = this.privateState
+    const positionEnd = this.refElement[this.scrollAttr]
+    const distance = positionEnd - positionStart
+    const time = (new Date() - startTime) / 1000
+    const velocity = Math.round(distance / time)
+    const acceleration = Math.round(velocity / time / 100)
     this.setPrivateState({ isMouseDown: false, lastMousePosition: null })
+    this.keepScrolling(acceleration)
   }
 
   provisionOnMouseDown = event => {
+    if (this.animation) {
+      clearInterval(this.animation)
+    }
     this.setPrivateState({
       isMouseDown: true,
       lastMousePosition: event[this.eventMove],
+      startTime: new Date(),
+      positionStart: this.refElement[this.scrollAttr],
     })
   }
 
