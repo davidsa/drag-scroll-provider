@@ -1,11 +1,14 @@
 {
   "name": "drag-scroll-provider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React component for click and drag scrolling",
   "main": "index.js",
   "author": "David Sttivend A",
   "license": "MIT",
-  "files": ["dist/main.js", "index.js"],
+  "files": [
+    "dist/main.js",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/davidsa/drag-scroll-provider.git"
@@ -14,7 +17,11 @@
   "bugs": {
     "url": "https://github.com/davidsa/drag-scroll-provider/issues"
   },
-  "keywords": ["react", "drag", "scroll"],
+  "keywords": [
+    "react",
+    "drag",
+    "scroll"
+  ],
   "scripts": {
     "build": "webpack --config webpack/prod.config.js",
     "dev": "webpack-dev-server --config webpack/dev.config.js --host 0.0.0.0",
