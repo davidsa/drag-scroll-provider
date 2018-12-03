@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   entry: './example/index.js',
   devtool: 'eval-source-map',
-  watch:true,
+  watch: true,
   output: {
     path: path.resolve(__dirname, '../example'),
     filename: 'main.js',
@@ -22,7 +22,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, '../example'),
-    watchContentBase: true
+    watchContentBase: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

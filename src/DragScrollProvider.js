@@ -2,13 +2,14 @@
 
 import React, { Component } from 'react'
 
+const DEFAULT_THRESHOLD = 0.15
+
 export default class DragScrollProvider extends Component {
   constructor(props) {
     super(props)
     this.privateState = {
       isMouseDown: false,
       lastMousePosition: null,
-      dragging: false,
       startTime: null,
     }
     this.refElement = null
@@ -40,6 +41,7 @@ export default class DragScrollProvider extends Component {
       this.scrollLength = 'scrollHeight'
       this.scrollOffset = 'offsetHeight'
     }
+    this.threshold = this.props.threshold || DEFAULT_THRESHOLD
     this.addEventListenerWithClear('mouseup', this.onMouseUp)
     this.addEventListenerWithClear('mousemove', this.onMouseMove)
   }
@@ -78,7 +80,6 @@ export default class DragScrollProvider extends Component {
       lastMousePosition - event[this.eventMove]
     this.setPrivateState({
       lastMousePosition: event[this.eventMove],
-      dragging: true,
     })
   }
 
@@ -89,7 +90,11 @@ export default class DragScrollProvider extends Component {
     const time = (new Date() - startTime) / 1000
     const velocity = Math.round(distance / time)
     const acceleration = Math.round(velocity / time / 100)
-    this.setPrivateState({ isMouseDown: false, lastMousePosition: null })
+    this.setPrivateState({
+      isMouseDown: false,
+      lastMousePosition: null,
+      time,
+    })
     this.keepScrolling(acceleration)
   }
 
@@ -131,9 +136,9 @@ export default class DragScrollProvider extends Component {
   }
 
   clickItem = callback => {
-    const { dragging } = this.privateState
-    if (dragging) {
-      return this.setPrivateState({ dragging: false })
+    const { time } = this.privateState
+    if (!time || time > this.threshold) {
+      return null
     }
     return callback()
   }
