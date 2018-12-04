@@ -15,13 +15,23 @@ class Example extends Component {
     return Math.floor(Math.random() * (end - start + 1) + start)
   }
 
-  getCards() {
+  getCards(clickItem) {
     let cardArray = []
     for (let i = 0; i < this.numberOfCards; i++) {
       const color = COLORS[this.getRandomNumber(0, COLORS.length - 1)]
-      cardArray.push(<Card key={i} color={color} />)
+      cardArray.push(
+        <Card
+          key={i}
+          color={color}
+          onClick={() => clickItem(() => this.handleClick(i))}
+        />
+      )
     }
     return cardArray
+  }
+
+  handleClick = index => {
+    console.log('Card click:', index)
   }
 
   render() {
@@ -30,13 +40,13 @@ class Example extends Component {
         <h1>Horizontal example</h1>
         <div className="example__container">
           <DragScrollProvider>
-            {({ onMouseDown, ref }) => (
+            {({ onMouseDown, ref, clickItem }) => (
               <div
                 className="example__scroll example__scroll--horizontal "
                 ref={ref}
                 onMouseDown={onMouseDown}
               >
-                {this.getCards()}
+                {this.getCards(clickItem)}
               </div>
             )}
           </DragScrollProvider>
@@ -60,8 +70,13 @@ class Example extends Component {
   }
 }
 
-const Card = ({ color }) => {
-  return <div style={{ backgroundColor: color, width: 80, height: 120 }} />
+const Card = ({ color, onClick }) => {
+  return (
+    <div
+      style={{ backgroundColor: color, width: 80, height: 120 }}
+      onClick={onClick}
+    />
+  )
 }
 
 render(<Example />, document.getElementById('root'))

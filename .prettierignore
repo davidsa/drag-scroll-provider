@@ -2,3 +2,4 @@
 *.html
 .prettierignore
 yarn.lock
+package.json
