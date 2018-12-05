@@ -1,7 +1,9 @@
 language: node_js
 cache:
+  yarn: true
   directories:
     - ~/.npm
+    - node_modules
 install:
   - yarn install
   - npm install -g codecov
