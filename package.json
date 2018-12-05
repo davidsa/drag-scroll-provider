@@ -1,51 +1,55 @@
 {
-  "name": "drag-scroll-provider",
-  "version": "1.0.5",
-  "description": "React component for click and drag scrolling",
-  "main": "index.js",
-  "author": "David Sttivend A",
-  "license": "MIT",
-  "files": [
-    "dist/main.js",
-    "index.js"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/davidsa/drag-scroll-provider.git"
-  },
-  "homepage": "https://github.com/davidsa/drag-scroll-provider",
-  "bugs": {
-    "url": "https://github.com/davidsa/drag-scroll-provider/issues"
-  },
-  "keywords": [
-    "react",
-    "drag",
-    "scroll"
-  ],
-  "scripts": {
-    "build": "webpack --config webpack/prod.config.js",
-    "dev": "webpack-dev-server --config webpack/dev.config.js --host 0.0.0.0",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "react": "^16.5.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-transform-react-jsx": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "husky": "^1.1.0",
-    "precise-commits": "^1.0.2",
-    "prettier": "^1.14.3",
-    "react-dom": "^16.5.2",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
-  }
+    "name": "drag-scroll-provider",
+    "version": "1.0.5",
+    "description": "React component for click and drag scrolling",
+    "main": "index.js",
+    "author": "David Sttivend A",
+    "license": "MIT",
+    "files": ["dist/main.js", "index.js"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/davidsa/drag-scroll-provider.git"
+    },
+    "homepage": "https://github.com/davidsa/drag-scroll-provider",
+    "bugs": {
+        "url": "https://github.com/davidsa/drag-scroll-provider/issues"
+    },
+    "keywords": ["react", "drag", "scroll"],
+    "scripts": {
+        "build": "webpack --config webpack/prod.config.js",
+        "dev":
+            "webpack-dev-server --config webpack/dev.config.js --host 0.0.0.0",
+        "test":
+            "mocha --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js",
+        "test:watch":
+            "mocha --watch --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js"
+    },
+    "dependencies": {
+        "react": "^16.5.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.2",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/plugin-transform-react-jsx": "^7.0.0",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/register": "^7.0.0",
+        "babel-loader": "^8.0.4",
+        "chai": "^4.2.0",
+        "css-loader": "^1.0.0",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.7.0",
+        "html-webpack-plugin": "^3.2.0",
+        "husky": "^1.1.0",
+        "jsdom": "^13.0.0",
+        "mocha": "^5.2.0",
+        "precise-commits": "^1.0.2",
+        "prettier": "^1.14.3",
+        "react-dom": "^16.5.2",
+        "sinon": "^7.1.1",
+        "style-loader": "^0.23.0",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.9"
+    }
 }

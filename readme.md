@@ -22,11 +22,11 @@ import DragScrollProvider from 'drag-scroll-provider'
 
 ```jsx
 <DragScrollProvider>
-  {({ onMouseDown, ref }) => (
-    <div className="scrollable" ref={ref} onMouseDown={onMouseDown}>
-      // content that overflows the parent
-    </div>
-  )}
+    {({ onMouseDown, ref }) => (
+        <div className="scrollable" ref={ref} onMouseDown={onMouseDown}>
+            // content that overflows the parent
+        </div>
+    )}
 </DragScrollProvider>
 ```
 
@@ -34,8 +34,8 @@ import DragScrollProvider from 'drag-scroll-provider'
 
 ```css
 .scrollable {
-  width: 500px;
-  overflow-x: scroll;
+    width: 500px;
+    overflow-x: scroll;
 }
 ```
 
@@ -43,7 +43,7 @@ optional: hide the scrollbar
 
 ```css
 .scrollable::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 ```
 
@@ -54,7 +54,6 @@ optional: hide the scrollbar
         vertical='true' // for vertical scrolling
         threshold={0.015} // threshold in seconds for handling click and drags in clickItem function
 />
-
 ```
 
 ### Available functions provided
