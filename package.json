@@ -20,7 +20,7 @@
         "dev":
             "webpack-dev-server --config webpack/dev.config.js --host 0.0.0.0",
         "test":
-            "nyc --reporter=text mocha --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js",
+            "nyc --reporter=text --reporter=html mocha --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js",
         "test:watch":
             "mocha --watch --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js",
         "coverage":
