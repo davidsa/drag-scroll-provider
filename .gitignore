@@ -2,3 +2,6 @@
 node_modules/
 dist/
 package/
+coverage/
+.nyc_output
+coverage.lcov
