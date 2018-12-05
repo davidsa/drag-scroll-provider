@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/davidsa/drag-scroll-provider.svg?branch=develop)](https://travis-ci.com/davidsa/drag-scroll-provider)
 
-[![codecov](https://codecov.io/gh/davidsa/drag-scroll-provider/branch/develop/graph/badge.svg)](https://codecov.io/gh/davidsa/drag-scroll-provider)
+[![codecov](https://codecov.io/gh/davidsa/drag-scroll-provider/branch/develop/graph/badge.svg)](https://codecov.io/gh/davidsa/drag-scroll-provider) [![Greenkeeper badge](https://badges.greenkeeper.io/davidsa/drag-scroll-provider.svg)](https://greenkeeper.io/)
 
 ## Drag Scroll Provider
 
