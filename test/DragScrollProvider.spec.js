@@ -20,6 +20,197 @@ describe('DragScrollProvider', () => {
         sandbox.restore()
     })
 
+    describe('constructor', () => {
+        let instance
+        beforeEach(() => {
+            instance = new DragScrollProvider()
+        })
+
+        it('should create an empty array named clearListeners', () => {
+            expect(instance.clearListeners).to.deep.equal([])
+        })
+
+        it('should set scrollAttr to scrollLeft as default', () => {
+            expect(instance.scrollAttr).to.equal('scrollLeft')
+        })
+
+        it('should set eventMove to clientX as default', () => {
+            expect(instance.eventMove).to.equal('clientX')
+        })
+
+        it('should set scrollLength to scrollWidth as default', () => {
+            expect(instance.scrollLength).to.equal('scrollWidth')
+        })
+
+        it('should set scrollOffset to offsetWidth as default', () => {
+            expect(instance.scrollOffset).to.equal('offsetWidth')
+        })
+
+        it('should initialize the privateState', () => {
+            expect(instance.privateState).to.have.property('isMouseDown', false)
+            expect(instance.privateState).to.have.property(
+                'lastMousePosition',
+                null
+            )
+            expect(instance.privateState).to.have.property('startTime', null)
+        })
+    })
+
+    describe('setPrivateState', () => {
+        let instance
+
+        beforeEach(() => {
+            instance = new DragScrollProvider()
+            instance.privateState = {
+                isMouseDown: false,
+                lastMousePosition: 100,
+            }
+        })
+
+        it('should merge both states', () => {
+            const state = { isMouseDown: true }
+            instance.setPrivateState(state)
+            expect(instance.privateState).to.deep.equal({
+                isMouseDown: true,
+                lastMousePosition: 100,
+            })
+        })
+
+        it('should return the previous state if state is empty', () => {
+            instance.setPrivateState({})
+            expect(instance.privateState).to.deep.equal({
+                isMouseDown: false,
+                lastMousePosition: 100,
+            })
+        })
+    })
+
+    describe('addEventListenerWithClear', () => {
+        let instance
+        let clearSpy
+        beforeEach(() => {
+            instance = new DragScrollProvider()
+            instance.refElement = {
+                addEventListener: sandbox.spy(),
+            }
+            clearSpy = sandbox.spy()
+            sandbox.stub(instance.clearListeners, 'push')
+            sandbox.stub(instance, 'removeListenerFactory').returns(clearSpy)
+        })
+
+        it('should call addEventListener with type and func', () => {
+            const myFunc = sandbox.spy()
+            instance.addEventListenerWithClear('mouseup', myFunc)
+            const { args } = instance.refElement.addEventListener.getCall(0)
+            expect(args[0]).to.equal('mouseup')
+            expect(args[1]).to.equal(myFunc)
+        })
+
+        it('should call removeListenerFactory with type and func', () => {
+            const myFunc = sandbox.spy()
+            instance.addEventListenerWithClear('mouseup', myFunc)
+            const { args } = instance.removeListenerFactory.getCall(0)
+            expect(args[0]).to.equal('mouseup')
+            expect(args[1]).to.equal(myFunc)
+        })
+
+        it('should push the clear function into clearListeners', () => {
+            const myFunc = sandbox.spy()
+            instance.addEventListenerWithClear('mouseup', myFunc)
+            const { args } = instance.clearListeners.push.getCall(0)
+            expect(args[0]).to.equal(clearSpy)
+        })
+    })
+
+    describe('removeListenerFactory', () => {
+        let instance
+        let result
+        let listener
+        beforeEach(() => {
+            const eventName = 'onclick'
+            instance = getWrapper().instance()
+            listener = sandbox.spy()
+            result = instance.removeListenerFactory(eventName, listener)
+        })
+
+        it('should return a function', () => {
+            expect(result).to.be.a('function')
+        })
+    })
+
+    describe('componentDidMount', () => {
+        let instance
+
+        beforeEach(() => {
+            instance = getWrapper().instance()
+            sandbox.spy(instance, 'addEventListenerWithClear')
+        })
+
+        it('should set threshold to default value if no props found', () => {
+            instance.componentDidMount()
+            expect(instance.threshold).to.equal(0.15)
+        })
+
+        it('should set the threshold to the prop value ', () => {
+            const threshold = 0.5
+            instance = getWrapper({ threshold }).instance()
+            instance.componentDidMount()
+            expect(instance.threshold).to.equal(threshold)
+        })
+
+        it('should call addEventListenerWithClear with mouseup and handler', () => {
+            instance.componentDidMount()
+            const { args } = instance.addEventListenerWithClear.getCall(0)
+            expect(args[0]).to.equal('mouseup')
+            expect(args[1]).to.equal(instance.onMouseUp)
+        })
+
+        it('should call addEventListenerWithClear with mousemove and handler', () => {
+            instance.componentDidMount()
+            const { args } = instance.addEventListenerWithClear.getCall(1)
+            expect(args[0]).to.equal('mousemove')
+            expect(args[1]).to.equal(instance.onMouseMove)
+        })
+
+        describe('vertical true', () => {
+            beforeEach(() => {
+                instance = getWrapper({ vertical: true }).instance()
+                instance.componentDidMount()
+            })
+
+            it('should set scrollAttr to scrollTop', () => {
+                expect(instance.scrollAttr).to.equal('scrollTop')
+            })
+
+            it('should set eventMove to clientY', () => {
+                expect(instance.eventMove).to.equal('clientY')
+            })
+
+            it('should set scrollLength to scrollHeight', () => {
+                expect(instance.scrollLength).to.equal('scrollHeight')
+            })
+
+            it('should set scrollOffset to offsetHeight', () => {
+                expect(instance.scrollOffset).to.equal('offsetHeight')
+            })
+        })
+    })
+
+    describe('componentWillUnmount', () => {
+        let instance
+        let spy
+        beforeEach(() => {
+            instance = getWrapper().instance()
+            spy = sandbox.spy()
+            instance.clearListeners = [spy]
+            instance.componentWillUnmount()
+        })
+
+        it('should call clearListeners internal functions', () => {
+            expect(spy.callCount).to.equal(1)
+        })
+    })
+
     describe('render', () => {
         it('should pass onMouseDown as a function', () => {
             const children = props => {
