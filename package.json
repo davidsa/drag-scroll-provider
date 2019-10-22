@@ -29,7 +29,7 @@
         "test:watch": "mocha --watch --require @babel/register --require ./test/setupTests.js ./test/**/*.spec.js",
         "coverage": "nyc report --reporter=text-lcov > coverage.lcov",
         "semantic-release": "semantic-release",
-        "travis-deploy-once": "travis-deploy-once",
+        "travis-deploy-once": "travis-deploy-once --pro",
         "commit": "git-cz"
     },
     "config": {
