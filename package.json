@@ -46,7 +46,7 @@
         "@babel/plugin-transform-react-jsx": "^7.9.0",
         "@babel/preset-env": "^7.9.0",
         "@babel/preset-react": "^7.9.0",
-        "@babel/register": "^7.0.0",
+        "@babel/register": "^7.9.0",
         "babel-loader": "^8.0.4",
         "chai": "^4.2.0",
         "commitizen": "^4.0.3",
