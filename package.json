@@ -61,7 +61,7 @@
         "mocha": "^6.0.0",
         "nyc": "^14.1.1",
         "precise-commits": "^1.0.2",
-        "prettier": "^1.14.3",
+        "prettier": "^2.0.3",
         "react-dom": "^16.5.2",
         "semantic-release": "^15.12.4",
         "sinon": "^7.1.1",
