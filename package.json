@@ -63,7 +63,7 @@
         "precise-commits": "^1.0.2",
         "prettier": "^1.14.3",
         "react-dom": "^16.5.2",
-        "semantic-release": "^15.12.4",
+        "semantic-release": "^17.2.3",
         "sinon": "^7.1.1",
         "style-loader": "^0.23.0",
         "travis-deploy-once": "^5.0.9",
